@@ -24,15 +24,15 @@ export default {
 
     mounted() {
         axios.get('api/projects').then(response => {
-            this.projects = response.data;
+            this.projects = response.data.data;
         });
     },
 
     computed: {
         projectsPerRow() {
-            const rows = [];
-            for (let i = 0; i < this.projects.length; i += 4) {
-                rows.push(this.projects.slice(i, i + 4));
+            const rows = [], chunkSize = 3;
+            for (let i = 0; i < this.projects.length; i += chunkSize) {
+                rows.push(this.projects.slice(i, i + chunkSize));
             }
             return rows;
         },

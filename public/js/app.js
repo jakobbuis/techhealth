@@ -1859,15 +1859,16 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('api/projects').then(function (response) {
-      _this.projects = response.data;
+      _this.projects = response.data.data;
     });
   },
   computed: {
     projectsPerRow: function projectsPerRow() {
-      var rows = [];
+      var rows = [],
+          chunkSize = 3;
 
-      for (var i = 0; i < this.projects.length; i += 4) {
-        rows.push(this.projects.slice(i, i + 4));
+      for (var i = 0; i < this.projects.length; i += chunkSize) {
+        rows.push(this.projects.slice(i, i + chunkSize));
       }
 
       return rows;
@@ -1920,7 +1921,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card[data-v-c10f8004] {\n    margin-left: 0.5em;\n    margin-right: 0.5em;\n}\n.card-header-title a[data-v-c10f8004] {\n    display: inline-block;\n    margin-left: 0.5em;\n}\ntd[data-v-c10f8004] {\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-c10f8004] {\n    margin-left: 0.5em;\n    margin-right: 0.5em;\n}\n.card-header-title a[data-v-c10f8004] {\n    display: inline-block;\n    margin-left: 0.5em;\n}\ntd.status[data-v-c10f8004] {\n    text-align: center;\n}\ntd.integer[data-v-c10f8004] {\n    text-align: right;\n}\n", ""]);
 
 // exports
 
@@ -3117,7 +3118,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "column is-3" }, [
+  return _c("div", { staticClass: "column is-4" }, [
     _c("div", { staticClass: "card" }, [
       _c("header", { staticClass: "card-header" }, [
         _c("p", { staticClass: "card-header-title" }, [
@@ -3146,33 +3147,61 @@ var render = function() {
             _c("tr", [
               _c("th", [_vm._v("Backend updates")]),
               _vm._v(" "),
-              _c("td", [_vm._v("0")]),
+              _c("td", { staticClass: "integer" }, [
+                _vm._v(_vm._s(_vm.project.stats.composer_outdated))
+              ]),
               _vm._v(" "),
-              _c("td", [_c("status", { attrs: { status: _vm.status } })], 1)
+              _c(
+                "td",
+                { staticClass: "status" },
+                [_c("status", { attrs: { status: _vm.status } })],
+                1
+              )
             ]),
             _vm._v(" "),
             _c("tr", [
               _c("th", [_vm._v("Frontend updates")]),
               _vm._v(" "),
-              _c("td", [_vm._v("0")]),
+              _c("td", { staticClass: "integer" }, [
+                _vm._v(_vm._s(_vm.project.stats.npm_outdated))
+              ]),
               _vm._v(" "),
-              _c("td", [_c("status", { attrs: { status: _vm.status } })], 1)
+              _c(
+                "td",
+                { staticClass: "status" },
+                [_c("status", { attrs: { status: _vm.status } })],
+                1
+              )
             ]),
             _vm._v(" "),
             _c("tr", [
               _c("th", [_vm._v("Frontend vulnerabilities")]),
               _vm._v(" "),
-              _c("td", [_vm._v("0")]),
+              _c("td", { staticClass: "integer" }, [
+                _vm._v(_vm._s(_vm.project.stats.npm_vulnerabilities))
+              ]),
               _vm._v(" "),
-              _c("td", [_c("status", { attrs: { status: _vm.status } })], 1)
+              _c(
+                "td",
+                { staticClass: "status" },
+                [_c("status", { attrs: { status: _vm.status } })],
+                1
+              )
             ]),
             _vm._v(" "),
             _c("tr", [
               _c("th", [_vm._v("Bugs in the last 30 days")]),
               _vm._v(" "),
-              _c("td", [_vm._v("0")]),
+              _c("td", { staticClass: "integer" }, [
+                _vm._v(_vm._s(_vm.project.stats.bugs))
+              ]),
               _vm._v(" "),
-              _c("td", [_c("status", { attrs: { status: _vm.status } })], 1)
+              _c(
+                "td",
+                { staticClass: "status" },
+                [_c("status", { attrs: { status: _vm.status } })],
+                1
+              )
             ])
           ])
         ]

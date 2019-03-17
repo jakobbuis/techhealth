@@ -1,5 +1,5 @@
 <template>
-    <div class="column is-3">
+    <div class="column is-4">
         <div class="card">
             <header class="card-header">
                 <p class="card-header-title">
@@ -18,23 +18,23 @@
                 <tbody>
                     <tr>
                         <th>Backend updates</th>
-                        <td>0</td>
-                        <td><status :status="status"></status></td>
+                        <td class="integer">{{ project.stats.composer_outdated }}</td>
+                        <td class="status"><status :status="status"></status></td>
                     </tr>
                     <tr>
                         <th>Frontend updates</th>
-                        <td>0</td>
-                        <td><status :status="status"></status></td>
+                        <td class="integer">{{ project.stats.npm_outdated }}</td>
+                        <td class="status"><status :status="status"></status></td>
                     </tr>
                     <tr>
                         <th>Frontend vulnerabilities</th>
-                        <td>0</td>
-                        <td><status :status="status"></status></td>
+                        <td class="integer">{{ project.stats.npm_vulnerabilities }}</td>
+                        <td class="status"><status :status="status"></status></td>
                     </tr>
                     <tr>
                         <th>Bugs in the last 30 days</th>
-                        <td>0</td>
-                        <td><status :status="status"></status></td>
+                        <td class="integer">{{ project.stats.bugs }}</td>
+                        <td class="status"><status :status="status"></status></td>
                     </tr>
                 </tbody>
             </table>
@@ -66,7 +66,10 @@ export default {
     display: inline-block;
     margin-left: 0.5em;
 }
-td {
+td.status {
     text-align: center;
+}
+td.integer {
+    text-align: right;
 }
 </style>
