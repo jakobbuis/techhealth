@@ -19,22 +19,42 @@
                     <tr>
                         <th>Backend updates</th>
                         <td class="integer">{{ project.stats.composer_outdated }}</td>
-                        <td class="status"><status :status="status"></status></td>
+                        <td class="status">
+                            <status
+                                :value="project.stats.composer_outdated"
+                                :warn="5" :bad="10">
+                            </status>
+                        </td>
                     </tr>
                     <tr>
                         <th>Frontend updates</th>
                         <td class="integer">{{ project.stats.npm_outdated }}</td>
-                        <td class="status"><status :status="status"></status></td>
+                        <td class="status">
+                            <status
+                                :value="project.stats.npm_outdated"
+                                :warn="5" :bad="10">
+                            </status>
+                        </td>
                     </tr>
                     <tr>
                         <th>Frontend vulnerabilities</th>
                         <td class="integer">{{ project.stats.npm_vulnerabilities }}</td>
-                        <td class="status"><status :status="status"></status></td>
+                        <td class="status">
+                            <status
+                                :value="project.stats.npm_vulnerabilities"
+                                :warn="1" :bad="2">
+                            </status>
+                        </td>
                     </tr>
                     <tr>
                         <th>Bugs in the last 30 days</th>
                         <td class="integer">{{ project.stats.bugs }}</td>
-                        <td class="status"><status :status="status"></status></td>
+                        <td class="status">
+                            <status
+                                :value="project.stats.bugs"
+                                :warn="300" :bad="1200">
+                            </status>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -48,12 +68,6 @@ import Status from './Status';
 export default {
     props: ['project'],
     components: { Status },
-
-    computed: {
-        status() {
-            return 'good';
-        }
-    },
 };
 </script>
 

@@ -1808,16 +1808,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['project'],
   components: {
     Status: _Status__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  computed: {
-    status: function status() {
-      return 'good';
-    }
   }
 });
 
@@ -1894,15 +1909,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['status'],
+  props: ['value', 'warn', 'bad'],
   computed: {
+    status: function status() {
+      var warn = this.warn;
+      var bad = this.bad;
+
+      if (this.value < warn) {
+        return 'good';
+      }
+
+      if (this.value < bad) {
+        return 'warning';
+      }
+
+      return 'bad';
+    },
     color: function color() {
-      // if (this.status === 'good') {
-      return 'has-text-success'; // }
+      if (this.status === 'good') {
+        return 'has-text-success';
+      }
+
+      if (this.status === 'warning') {
+        return 'has-text-warning';
+      }
+
+      if (this.status === 'bad') {
+        return 'has-text-danger';
+      }
     },
     icon: function icon() {
-      // if (this.status === 'good') {
-      return 'fa-check'; // }
+      if (this.status === 'good') {
+        return 'fa-check';
+      }
+
+      if (this.status === 'warning') {
+        return 'fa-exclamation-triangle';
+      }
+
+      if (this.status === 'bad') {
+        return 'fa-times';
+      }
     }
   }
 });
@@ -3154,7 +3201,15 @@ var render = function() {
               _c(
                 "td",
                 { staticClass: "status" },
-                [_c("status", { attrs: { status: _vm.status } })],
+                [
+                  _c("status", {
+                    attrs: {
+                      value: _vm.project.stats.composer_outdated,
+                      warn: 5,
+                      bad: 10
+                    }
+                  })
+                ],
                 1
               )
             ]),
@@ -3169,7 +3224,15 @@ var render = function() {
               _c(
                 "td",
                 { staticClass: "status" },
-                [_c("status", { attrs: { status: _vm.status } })],
+                [
+                  _c("status", {
+                    attrs: {
+                      value: _vm.project.stats.npm_outdated,
+                      warn: 5,
+                      bad: 10
+                    }
+                  })
+                ],
                 1
               )
             ]),
@@ -3184,7 +3247,15 @@ var render = function() {
               _c(
                 "td",
                 { staticClass: "status" },
-                [_c("status", { attrs: { status: _vm.status } })],
+                [
+                  _c("status", {
+                    attrs: {
+                      value: _vm.project.stats.npm_vulnerabilities,
+                      warn: 1,
+                      bad: 2
+                    }
+                  })
+                ],
                 1
               )
             ]),
@@ -3199,7 +3270,15 @@ var render = function() {
               _c(
                 "td",
                 { staticClass: "status" },
-                [_c("status", { attrs: { status: _vm.status } })],
+                [
+                  _c("status", {
+                    attrs: {
+                      value: _vm.project.stats.bugs,
+                      warn: 300,
+                      bad: 1200
+                    }
+                  })
+                ],
                 1
               )
             ])
