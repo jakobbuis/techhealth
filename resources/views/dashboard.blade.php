@@ -10,19 +10,21 @@
         <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
     </head>
     <body>
-        <section class="hero is-primary">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">Tech Health</h1>
-                    <h2 class="subtitle">
-                        {{ \Carbon\Carbon::now()->formatLocalized('%e %B %Y %H:%M') }}
-                    </h2>
-                </div>
-            </div>
-        </section>
-
         <div id="app">
-            <projects></projects>
+            <section class="hero is-primary">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">Tech Health</h1>
+                        <h2 class="subtitle">
+                            {{ \Carbon\Carbon::now()->formatLocalized('%e %B %Y %H:%M') }}
+                        </h2>
+
+                        <filters :filter.sync="filter"></filters>
+                    </div>
+                </div>
+            </section>
+
+            <projects :filter="filter"></projects>
         </div>
 
         <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>

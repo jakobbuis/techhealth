@@ -14,6 +14,8 @@
 import Project from './Project';
 
 export default {
+    props: ['filter'],
+
     components: { Project },
 
     data() {
@@ -29,10 +31,21 @@ export default {
     },
 
     computed: {
+        // Filter the list of projects based on current filter selected
+        filteredProjects() {
+            const projects = this.projects;
+            const filter = this.filter;
+            if (this.filter === 'all') {
+                return projects;
+            }
+            return [];
+        },
+
+        // Chunk the current set of projects in sets of 3 for use in multiple rows
         projectsPerRow() {
-            const rows = [], chunkSize = 3;
-            for (let i = 0; i < this.projects.length; i += chunkSize) {
-                rows.push(this.projects.slice(i, i + chunkSize));
+            const rows = [], chunkSize = 3, projects = this.filteredProjects;
+            for (let i = 0; i < projects.length; i += chunkSize) {
+                rows.push(projects.slice(i, i + chunkSize));
             }
             return rows;
         },
